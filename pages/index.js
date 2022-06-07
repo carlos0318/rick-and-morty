@@ -11,6 +11,8 @@ import {
   useToast
 } from '@chakra-ui/react'
 
+import Characters from '../components/Characters';
+
 export default function Home(results) {
   const initialState = results;
   const [characters, setCharacters] = useState(initialState.characters);
@@ -27,6 +29,7 @@ export default function Home(results) {
           Rick and Morty
         </Heading>
       </Box>
+      <Characters characters={characters}/>
     </Flex>
   )
 }
