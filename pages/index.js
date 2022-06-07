@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({ characters }) {
+  console.log(characters)
   return (
     <div className={styles.container}>
       <Head>
@@ -18,5 +19,42 @@ export async function getStaticProps() {
   const client = new ApolloClient({
     uri: "https://rickandmortyapi.com/graphql/",
     cache: new InMemoryCache(),
+  });
+
+  const { data } = await client.query({
+    query: gql`
+      query {
+        characters(page: 1){
+          info{
+            count
+            pages
+          }
+          results {
+            name
+            id
+            location{
+              id
+              name
+            }
+            origin{
+              id
+              name
+            }
+            episode{
+              id
+              episode
+              air_date
+            }
+            image
+          }
+        }
+      }
+    `
   })
+
+  return {
+    props: {
+      characters: data.characters.results,
+    }
+  }
 }
