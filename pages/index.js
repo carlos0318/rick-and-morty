@@ -1,9 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import { useState } from 'react';
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 import styles from '../styles/Home.module.css'
 
+
 export default function Home({ characters }) {
-  console.log(characters)
   return (
     <div className={styles.container}>
       <Head>
