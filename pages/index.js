@@ -16,6 +16,7 @@ export default function Home() {
 
 export async function getStaticProps() {
   const client = new ApolloClient({
-    
+    uri: "https://rickandmortyapi.com/graphql/",
+    cache: new InMemoryCache(),
   })
 }
